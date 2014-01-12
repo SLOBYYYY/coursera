@@ -14,9 +14,12 @@ J = 0;
 %               You should set J to the cost.
 
 
+% hypothesis = theta' * X';
+% sum_inner = (hypothesis - y').^2;
+% J = sum(sum_inner) / (2*m);
 
-
-
+% In short:
+J = sum((theta' * X' -y').^2) / (2 * m);
 % =========================================================================
 
 end
