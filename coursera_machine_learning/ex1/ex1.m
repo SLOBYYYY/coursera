@@ -63,13 +63,14 @@ iterations = 1500;
 alpha = 0.01;
 
 % run gradient descent
-theta = gradientDescent(X, y, theta, alpha, iterations);
+theta = gradientDescent(X, y, theta, alpha, iterations)
 
 % print theta to screen
 fprintf('Theta found by gradient descent: ');
 fprintf('%f %f \n', theta(1), theta(2));
 
 % Plot the linear fit
+X(:,2)
 hold on; % keep previous plot visible
 plot(X(:,2), X*theta, '-')
 legend('Training data', 'Linear regression')
