@@ -7,6 +7,9 @@ function [J, grad] = costFunctionReg(theta, X, y, lambda)
 % Initialize some useful values
 m = length(y); % number of training examples
 
+J = 0;
+grad = zeros(size(theta));
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
 %               You should set J to the cost.
@@ -15,13 +18,16 @@ m = length(y); % number of training examples
 
 hypothesis = sigmoid(X * theta);
 
-regtag = lambda / (2 * m) * sum(theta.^2);
+% Don't use first theta for cost function
+reduced_theta = theta(2:size(theta,1));
+regtag = lambda / (2 * m) * sum(reduced_theta.^2);
 J = sum(-y .* log(hypothesis) - (1 - y) .* log(1 - hypothesis)) / m + regtag;
 
-grad(1) = (sum((hypothesis -y)' * X(:,1))) / m;
+% Don't use first theta
+grad(1) = sum((hypothesis -y)' * X(:,1)) / m;
 for i = 2:size(theta,1)
-	ragtag = lambda / m * theta(i);
-	grad(i) = (sum((hypothesis - y)' * X(:,i))) / m + ragtag;
+	regtag = lambda / m * theta(i);
+	grad(i) = (sum((hypothesis - y)' * X(:,i))) / m + regtag;
 end;
 
 % =============================================================
