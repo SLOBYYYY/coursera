@@ -57,6 +57,7 @@ hold off;
 % term is handled
 X = mapFeature(X(:,1), X(:,2));
 
+
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);
 
@@ -93,8 +94,7 @@ lambda = 1;
 options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 % Optimize
-[theta, J, exit_flag] = ...
-	fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
+[theta, J, exit_flag] = fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
 
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
