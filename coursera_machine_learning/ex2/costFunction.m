@@ -21,7 +21,7 @@ hypothesis = sigmoid(X * theta);
 J = sum(-y .* log(hypothesis) - (1 - y) .* log(1 - hypothesis)) / m;
 
 for i = 1:size(theta,1)
-	grad(i,1) = sum((hypothesis - y)' * X(:,i));
+	grad(i,1) = (sum((hypothesis - y)' * X(:,i))) / m;
 end;
 
 % =============================================================
