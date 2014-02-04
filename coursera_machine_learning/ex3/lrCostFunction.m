@@ -38,10 +38,14 @@ grad = zeros(size(theta));
 
 hypothesis = sigmoid(X * theta);
 
-J = sum(-y .* log(hypothesis) - (1 - y) .* log(1 - hypothesis)) / m;
+% Don't use first theta for cost function
+reduced_theta = [0;theta(2:end)];
+regtag = lambda / (2 * m) * sum(reduced_theta.^2);
+J = sum(-y .* log(hypothesis) - (1 - y) .* log(1 - hypothesis)) / m + regtag;
 
 % Based on ex3.pdf
-grad = X' * (hypothesis - y) / m;
+regtag = lambda / m * reduced_theta;
+grad = X' * (hypothesis - y) / m + regtag;
 
 % =============================================================
 
