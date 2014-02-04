@@ -36,10 +36,10 @@ X = [ones(m, 1) X];
 % Get the highest value, NOT the sigmoid. Getting the sigmoud would produce
 % more then one possible answers in some cases
 
-% Gives a 5000 * 10 matrix back. The 10 columns contain the calculated confidence for the labels
+% Gives a 5000 * 10 matrix back. The 10 columns contain the calculated hypothesis for the labels
 values = X * all_theta';
 % Get the maximum for each row. "p" will be filled with their indices
-[~, p] = max(values, [], 2);
+[~, p] = max(sigmoid(values), [], 2);
 
 % =========================================================================
 
