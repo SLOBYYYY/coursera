@@ -34,6 +34,7 @@ num_labels = 10;          % 10 labels, from 1 to 10
 fprintf('Loading and Visualizing Data ...\n')
 
 load('ex3data1.mat');
+% X: 5000 * 400
 m = size(X, 1);
 
 % Randomly select 100 data points to display
@@ -60,9 +61,22 @@ load('ex3weights.mat');
 %  neural network to predict the labels of the training set. This lets
 %  you compute the training set accuracy.
 
+% Theta1: 25 * 401
+% Theta2: 10 * 26
+
 pred = predict(Theta1, Theta2, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
+
+
+fprintf('\nDisplaying SHAME values!\n');
+fault = find(pred != y);
+for i = 1:size(fault)
+	displayData(X(fault(i), :));
+	pred = predict(Theta1, Theta2, X(fault(i),:));
+    fprintf('\nPredicted: %d ,but its: %d\n', pred, y(fault(i)));
+    pause;
+end;
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
