@@ -29,12 +29,17 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
+% X: 5000 * 401
+% all_theta: 10 * 401
+% p: 5000 * 1
 
+% Get the highest value, NOT the sigmoid. Getting the sigmoud would produce
+% more then one possible answers in some cases
 
-
-
-
-
+% Gives a 5000 * 10 matrix back. The 10 columns contain the calculated confidence for the labels
+values = X * all_theta';
+% Get the maximum for each row. "p" will be filled with their indices
+[~, p] = max(values, [], 2);
 
 % =========================================================================
 
