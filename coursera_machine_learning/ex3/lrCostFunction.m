@@ -36,14 +36,12 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+hypothesis = sigmoid(X * theta);
 
+J = sum(-y .* log(hypothesis) - (1 - y) .* log(1 - hypothesis)) / m;
 
-
-
-
-
-
-
+% Based on ex3.pdf
+grad = X' * (hypothesis - y) / m;
 
 % =============================================================
 
