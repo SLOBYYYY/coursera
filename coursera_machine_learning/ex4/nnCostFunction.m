@@ -88,12 +88,9 @@ a2 = [ones(a2size,1), a2];
 z3 = a2 * Theta2';
 hypothesis = sigmoid(z3);
 % hypothesis: 5000 * 10
+% y_array: 5000 * 10
 
-J = 0;
-for label = 1:num_labels
-	J = J + sum(-y_array(:, label) .* log(hypothesis(:, label)) - (1 - y_array(:, label)) .* log(1 - hypothesis(:, label)));
-end;
-J = J / m;
+J = sum(sum(-y_array .* log(hypothesis) - (1 - y_array) .* log(1 - hypothesis))) / m;
 
 % =========================================================================
 
