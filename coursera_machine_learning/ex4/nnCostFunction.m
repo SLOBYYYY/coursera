@@ -90,7 +90,13 @@ hypothesis = sigmoid(z3);
 % hypothesis: 5000 * 10
 % y_array: 5000 * 10
 
-J = sum(sum(-y_array .* log(hypothesis) - (1 - y_array) .* log(1 - hypothesis))) / m;
+alternative_theta1 = [zeros(size(Theta1,1),1), Theta1(:, 2:end)];
+% alternative_theta1: 25 * 401
+alternative_theta2 = [zeros(size(Theta2,1),1), Theta2(:, 2:end)];
+% alternative_theta2: 10 * 26
+
+regularization_tag = lambda / (2 * m) * (sum(sum(alternative_theta1.^2)) + sum(sum(alternative_theta2.^2)));
+J = sum(sum(-y_array .* log(hypothesis) - (1 - y_array) .* log(1 - hypothesis))) / m + regularization_tag;
 
 % =========================================================================
 
