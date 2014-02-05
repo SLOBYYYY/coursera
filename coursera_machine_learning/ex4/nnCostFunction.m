@@ -62,25 +62,38 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Add ones to the beginning
+X = [ones(m,1), X];
 
+% Ugly method to transform the y to an array where the value 1 at the
+% appropriate index represents the value of y
+y_array = zeros(m,num_labels);
+for i = 1:m
+	y_array(i, y(i)) = 1;
+end;
 
+% X: 5000 * 401
+% Theta1: 25 * 401
+% Theta2: 10 * 26
+% y: 5000 * 1
 
+z2 = X * Theta1';
+a2 = sigmoid(z2);
+% a2: 5000 * 25
 
+% Add the bias to the beginning
+a2size = size(a2,1);
+a2 = [ones(a2size,1), a2];
 
+z3 = a2 * Theta2';
+hypothesis = sigmoid(z3);
+% hypothesis: 5000 * 10
 
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
+J = 0;
+for label = 1:num_labels
+	J = J + sum(-y_array(:, label) .* log(hypothesis(:, label)) - (1 - y_array(:, label)) .* log(1 - hypothesis(:, label)));
+end;
+J = J / m;
 
 % =========================================================================
 
