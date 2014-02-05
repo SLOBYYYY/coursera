@@ -111,8 +111,11 @@ d2 = d2(:,2:end);
 % X: 5000 * 401
 % Theta1_grad: 25 * 401
 % Theta2_grad: 10 * 26
-Theta2_grad = (Theta2_grad + d3' * a2) ./ m;
-Theta1_grad = (Theta1_grad + d2' * X) ./ m;
+theta2_regularization_tag = alternative_theta2 * lambda / m;
+theta1_regularization_tag = alternative_theta1 * lambda / m;
+
+Theta2_grad = (Theta2_grad + d3' * a2) ./ m + theta2_regularization_tag;
+Theta1_grad = (Theta1_grad + d2' * X) ./ m + theta1_regularization_tag;
 
 % =========================================================================
 
