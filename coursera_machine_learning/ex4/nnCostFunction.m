@@ -62,7 +62,7 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-% Add ones to the beginning
+% Add the bias to the beginning
 X = [ones(m,1), X];
 
 % Ugly method to transform the y to an array where the value 1 at the
@@ -97,6 +97,22 @@ alternative_theta2 = [zeros(size(Theta2,1),1), Theta2(:, 2:end)];
 
 regularization_tag = lambda / (2 * m) * (sum(sum(alternative_theta1.^2)) + sum(sum(alternative_theta2.^2)));
 J = sum(sum(-y_array .* log(hypothesis) - (1 - y_array) .* log(1 - hypothesis))) / m + regularization_tag;
+
+d3 = hypothesis - y_array;
+% d3: 5000 * 10
+
+d2 = d3  * Theta2 .* (a2 .* (1 - a2));
+% d2: 5000 * 26
+% Remove zeroth d2 as it's for the bias
+d2 = d2(:,2:end);
+% d2: 5000 * 25
+
+% a2: 5000 * 26
+% X: 5000 * 401
+% Theta1_grad: 25 * 401
+% Theta2_grad: 10 * 26
+Theta2_grad = (Theta2_grad + d3' * a2) ./ m;
+Theta1_grad = (Theta1_grad + d2' * X) ./ m;
 
 % =========================================================================
 
