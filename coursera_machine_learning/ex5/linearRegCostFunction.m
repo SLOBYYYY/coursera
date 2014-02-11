@@ -19,9 +19,14 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+hypothesis = X * theta;
+
 reduced_theta = [0;theta(2:end)];
 regtag = lambda / (2 * m) * sum(reduced_theta.^2);
-J = (X * theta - y)' * (X * theta - y) / (2 * m) + regtag;
+J = (hypothesis - y)' * (hypothesis - y) / (2 * m) + regtag;
+
+regtag = lambda / m * reduced_theta;
+grad = X' * (hypothesis - y) / m + regtag;
 
 % =========================================================================
 
