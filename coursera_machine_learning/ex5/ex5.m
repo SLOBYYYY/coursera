@@ -164,6 +164,7 @@ pause;
 %  lambda to see how the fit and learning curve change.
 %
 
+% Best value is lambda=2 according to the validationCurve
 lambda = 0;
 [theta] = trainLinearReg(X_poly, y, lambda);
 

@@ -37,16 +37,19 @@ error_val = zeros(length(lambda_vec), 1);
 %           
 %       end
 %
-%
 
+% The method is almost the same as the learningCurve but we can use all training examples since
+% we are not checking how is it improving based on training samples but we're checking the
+% lambdas
 
-
-
-
-
-
-
-
+% Iterate over all lambdas
+for i = 1:length(lambda_vec)
+	% Get theta for the current lambda
+	[theta] = trainLinearReg(X, y, lambda_vec(i));
+	% Calculate errors for all training and validation data with zero lambda(!)
+	error_train(i) = linearRegCostFunction(X, y, theta, 0);
+	error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end;
 
 % =========================================================================
 
