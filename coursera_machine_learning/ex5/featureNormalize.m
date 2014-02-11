@@ -5,6 +5,8 @@ function [X_norm, mu, sigma] = featureNormalize(X)
 %   is 1. This is often a good preprocessing step to do when
 %   working with learning algorithms.
 
+% This is just the plain old normalization because we have pretty high
+% order polynomials (8 in this exercise) and they would run off quickly
 mu = mean(X);
 X_norm = bsxfun(@minus, X, mu);
 

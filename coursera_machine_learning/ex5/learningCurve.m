@@ -51,11 +51,14 @@ error_val   = zeros(m, 1);
 %       end
 %
 
-% ---------------------- Sample Solution ----------------------
+% We gradually increase the samples of the training data and see how it improves
 
 for i=1:m
+	% Get theta only for a subset of the samples!
 	[theta] = trainLinearReg(X(1:i,:), y(1:i), lambda);
+	% Get the error for thesubset of the sample
 	error_train(i) = linearRegCostFunction(X(1:i, :), y(1:i), theta, 0);
+	% Get the error for all(!) the validation samples
 	error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
 end;
 
