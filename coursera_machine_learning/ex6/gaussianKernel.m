@@ -16,10 +16,11 @@ sim = 0;
 %
 %
 
+% GaussianKernel is a similarity function that measures the distance
+% between a pair of examples. If they are really close (or equal) then
+% sim will be 1. If they are really distant, it will be 0
 
-
-
-
+sim = exp(sum((x1-x2).^2) / (-2 * sigma^2));
 
 % =============================================================
     
