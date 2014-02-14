@@ -48,10 +48,9 @@ x = zeros(n, 1);
 %
 %
 
-for i = 1:n
-	if find(word_indices==i) != 0
-		x(i) = 1;
-	end;
+for i = 1:length(word_indices)
+	word_num = word_indices(i);
+	x(word_num) = 1;
 end;
 
 % =========================================================================
