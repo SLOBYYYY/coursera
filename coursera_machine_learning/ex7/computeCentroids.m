@@ -35,7 +35,9 @@ for i = 1:m
 	counter(idx(i),:) += 1;
 end;
 
-centroids = assignedPoints ./ counter;
+for i = 1:K
+	centroids(i,:) = assignedPoints(i,:) ./ counter(i);
+end;
 
 % =============================================================
 
