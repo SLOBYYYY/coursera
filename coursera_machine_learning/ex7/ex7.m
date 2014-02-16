@@ -147,13 +147,22 @@ fprintf('\nApplying K-Means to compress an image.\n\n');
 
 % Find closest cluster members
 idx = findClosestCentroids(X, centroids);
+% size(idx): 16384 x 1
+% idx contains that a certain point in X is close to which color that 
+% is mostly used on the picture
 
 % Essentially, now we have represented the image X as in terms of the
 % indices in idx. 
 
 % We can now recover the image from the indices (idx) by mapping each pixel
 % (specified by it's index in idx) to the centroid value
+
+% size(centroids): 16 x 3
+% This gets size(idx,1) rows (16384) with 3 columns filled with the values of 
+% the appropriate centroids
+% Eg. if centroid(1) = [34,112,2] then if idx(4985)=1 then X_recovered(4985)=[34,112,2]
 X_recovered = centroids(idx,:);
+% size(X_recovered): 16384 x 3
 
 % Reshape the recovered image into proper dimensions
 X_recovered = reshape(X_recovered, img_size(1), img_size(2), 3);
