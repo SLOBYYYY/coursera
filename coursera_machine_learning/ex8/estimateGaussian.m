@@ -21,15 +21,12 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+mu = mean(X);
+% var computes the variance but does the division with m-1. This is fixed by multiplying with m-1/m
+sigma2 = (var(X) * (m-1)) / m;
 
-
-
-
-
-
-
-
-
+mu = mu(:);
+sigma2 = sigma2(:);
 % =============================================================
 
 
