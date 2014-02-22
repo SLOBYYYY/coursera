@@ -40,21 +40,9 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-% X: 5*3
-% Theta: 4*3
-% R: 5 * 4
-% Y: 5 * 4
-summary = 0;
-for movie = 1:num_movies
-	for user = 1:num_users
-		if R(movie,user) == 1
-			summary = summary + (Theta(user,:) * X(movie,:)' - Y(movie, user))^2;
-		end;
-	end;
-end;
-
-
-J = summary / 2;
+% num_movies * num_users matrix from only the values where R(movie,user) = 1
+costMatrix = (X * Theta') .* R - R .* Y;
+J = sum(sum(costMatrix.^2)) / 2;
 
 % =============================================================
 
