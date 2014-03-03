@@ -42,7 +42,15 @@ Theta_grad = zeros(size(Theta));
 
 % num_movies * num_users matrix from only the values where R(movie,user) = 1
 costMatrix = (X * Theta') .* R - R .* Y;
-J = sum(sum(costMatrix.^2)) / 2;
+
+% Regularization1 is summing up the square of users' features and multiply it 
+% with lambda / 2
+regularization1 = (lambda / 2) * sum(sum(Theta .^ 2));
+% Regularization2 is summing up the square of movies' features and multiply it 
+% with lambda / 2
+regularization2 = (lambda / 2) * sum(sum(X .^ 2));
+regularization = regularization1 + regularization2;
+J = sum(sum(costMatrix.^2)) / 2 + regularization;
 
 X_grad = costMatrix * Theta;
 Theta_grad = costMatrix' * X;
