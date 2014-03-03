@@ -44,6 +44,9 @@ Theta_grad = zeros(size(Theta));
 costMatrix = (X * Theta') .* R - R .* Y;
 J = sum(sum(costMatrix.^2)) / 2;
 
+X_grad = costMatrix * Theta;
+Theta_grad = costMatrix' * X;
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
