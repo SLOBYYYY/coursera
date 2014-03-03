@@ -52,8 +52,8 @@ regularization2 = (lambda / 2) * sum(sum(X .^ 2));
 regularization = regularization1 + regularization2;
 J = sum(sum(costMatrix.^2)) / 2 + regularization;
 
-X_grad = costMatrix * Theta;
-Theta_grad = costMatrix' * X;
+X_grad = costMatrix * Theta + lambda .* X;
+Theta_grad = costMatrix' * X + lambda .* Theta;
 
 % =============================================================
 
